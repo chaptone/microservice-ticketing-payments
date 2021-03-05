@@ -1,7 +1,7 @@
 GET ticketing.dev/api/tickets
 
 ###
-POST ticketing.dev/api/payments
+POST http://ticketing.dev/api/payments
 Content-Type: application/json
 
 {

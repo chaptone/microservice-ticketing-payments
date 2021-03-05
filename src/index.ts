@@ -6,6 +6,9 @@ import { OrderCreatedListener } from "./events/listeners/order-created-listener"
 import { natsWrapper } from "./nats-wrapper";
 
 const start = async () => {
+  if (!process.env.STRIPE_KEY) {
+    throw new Error("STRIPE_KEY must be defined.");
+  }
   if (!process.env.JWT_KEY) {
     throw new Error("JWT_KEY must be defined.");
   }
@@ -25,7 +28,7 @@ const start = async () => {
     await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,
       process.env.NATS_CLIENT_ID,
-      process.env.NATS_URL,
+      process.env.NATS_URL
     );
 
     natsWrapper.client.on("close", () => {
